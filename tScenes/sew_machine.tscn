@@ -236,11 +236,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.66, 0)
 shape = SubResource("BoxShape3D_2elo7")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 10.0
+wait_time = 2.0
 one_shot = true
 
 [node name="Timer2" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.1
 
 [node name="Timer3" type="Timer" parent="."]
 one_shot = true
@@ -253,7 +253,8 @@ collision_mask = 12
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.66, 0)
 shape = SubResource("BoxShape3D_2elo7")
 
-[node name="joint" type="HingeJoint3D" parent="."]
+[node name="joint" type="PinJoint3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.509151, 0)
 node_a = NodePath("..")
 
 [node name="silks" type="Node3D" parent="."]

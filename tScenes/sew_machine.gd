@@ -11,14 +11,18 @@ var collide_with_walls: bool = true
 
 signal back
 
+var throwen: bool = false
+
 var silk_count: int = 0
-@onready var joint: HingeJoint3D = $joint
+@onready var joint: PinJoint3D = $joint
 var temp_joint: HingeJoint3D
 
 var idx: int
 
 
 func wall_up(body: Node3D) -> void:
+	if throwen:
+		pull_out()
 	if animator.is_playing():
 		return
 	if collide_with_walls and !active:
@@ -35,6 +39,7 @@ func wall_down(body: Node3D) -> void:
 func change_state():
 	lock_rotation = !lock_rotation
 	freeze = !freeze
+	throwen = !throwen
 
 func _process(_delta: float) -> void:
 	if active:
@@ -97,14 +102,30 @@ func silk_spawn() -> void:
 	
 	#get_tree().get_root().add_child(silk)
 	$silks.add_child(silk)
-	silk.set_values($spawn_pos.global_position, global_rotation)
 	if silk_count == 0:
+		silk.set_values(joint.global_position, joint.global_rotation)
 		joint.node_b = silk.get_path()
+		#silk.joint.node_b = joint.node_b
 	else:
-		temp_joint = HingeJoint3D.new()
-		$joints.add_child(temp_joint)
-		$Timer2.connect("timeout", temp_joint.queue_free)
-		temp_joint.node_a = joint.node_b
-		temp_joint.node_b = silk.get_path()
+		# выходила ошибка хз поч какой-то проеб по кол-ву элементов в ноде silks
+		# но мне разбираться пиздец лень, поэтому просто проверку въебалФ
+		var prev_silk_joint: PinJoint3D = $silks.get_child(silk_count).joint if is_instance_valid($silks.get_child(silk_count)) else joint
+		
+		silk.set_values(prev_silk_joint.global_position, 
+						prev_silk_joint.global_rotation)
+		prev_silk_joint.node_b = silk.get_path()
 	silk_count += 1
+	
+	#ласт комм: впизду 
+	
+	#if silk_count == 0:
+		#joint.node_b = silk.get_path()
+	#else:
+		#temp_joint = HingeJoint3D.new()
+		#$joints.add_child(temp_joint)
+		#temp_joint.global_position = silk.pos
+		#$Timer2.connect("timeout", temp_joint.queue_free)
+		#temp_joint.node_a = joint.node_b
+		#temp_joint.node_b = silk.get_path()
+	#silk_count += 1
 	
