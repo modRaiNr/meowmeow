@@ -1,10 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://bg0n1d4df5xb1"]
+[gd_scene load_steps=6 format=3 uid="uid://bg0n1d4df5xb1"]
 
 [ext_resource type="Script" path="res://tScenes/silk.gd" id="1_50aaj"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_8n1vf"]
 height = 0.8
 radius = 0.05
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_m6spu"]
+radius = 0.1
+height = 0.8
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hpf7s"]
 
@@ -15,7 +19,7 @@ bottom_radius = 0.05
 height = 0.8
 radial_segments = 8
 
-[node name="silk" type="StaticBody3D"]
+[node name="silk" type="RigidBody3D"]
 collision_layer = 16
 collision_mask = 4
 script = ExtResource("1_50aaj")
@@ -23,11 +27,17 @@ script = ExtResource("1_50aaj")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CylinderShape3D_8n1vf")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("CylinderMesh_b50yj")
-
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
+
+[node name="SoftBody3D" type="SoftBody3D" parent="."]
+mesh = SubResource("CapsuleMesh_m6spu")
+collision_layer = 16
+collision_mask = 4
+parent_collision_ignore = NodePath("..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CylinderMesh_b50yj")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

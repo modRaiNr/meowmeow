@@ -1,0 +1,73 @@
+[gd_scene load_steps=3 format=3 uid="uid://defotcj4dw4f7"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lw3r4"]
+radius = 0.1
+height = 0.4
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_plgre"]
+radius = 0.1
+height = 0.4
+
+[node name="Node3D" type="Node3D"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+use_collision = true
+size = Vector3(10, 1, 10)
+
+[node name="HingeJoint3D" type="HingeJoint3D" parent="."]
+node_a = NodePath("../static")
+node_b = NodePath("../RigidBody3D")
+motor/enable = true
+
+[node name="HingeJoint3D2" type="HingeJoint3D" parent="."]
+node_a = NodePath("../RigidBody3D")
+node_b = NodePath("../RigidBody3D2")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.715395, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("CapsuleShape3D_lw3r4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+mesh = SubResource("CapsuleMesh_plgre")
+
+[node name="RigidBody3D2" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.294691, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D2"]
+shape = SubResource("CapsuleShape3D_lw3r4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D2"]
+mesh = SubResource("CapsuleMesh_plgre")
+
+[node name="RigidBody3D3" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D3"]
+shape = SubResource("CapsuleShape3D_lw3r4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D3"]
+mesh = SubResource("CapsuleMesh_plgre")
+
+[node name="RigidBody3D4" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.51775, 0.385812, -0.942554)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D4"]
+shape = SubResource("CapsuleShape3D_lw3r4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D4"]
+mesh = SubResource("CapsuleMesh_plgre")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.556518, -0.228507, 0.798795, -0.00880341, 0.963003, 0.269348, -0.830789, 0.142865, -0.53794, 3.99349, 0.755242, -1.84761)
+
+[node name="static" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.81926, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="static"]
+shape = SubResource("CapsuleShape3D_lw3r4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="static"]
+mesh = SubResource("CapsuleMesh_plgre")

@@ -234,14 +234,13 @@ material = SubResource("StandardMaterial3D_y84ug")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.66, 0)
 shape = SubResource("BoxShape3D_2elo7")
-disabled = true
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 10.0
 one_shot = true
 
 [node name="Timer2" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.5
 
 [node name="Timer3" type="Timer" parent="."]
 one_shot = true
@@ -253,6 +252,16 @@ collision_mask = 12
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.66, 0)
 shape = SubResource("BoxShape3D_2elo7")
+
+[node name="joint" type="HingeJoint3D" parent="."]
+node_a = NodePath("..")
+
+[node name="silks" type="Node3D" parent="."]
+
+[node name="joints" type="Node3D" parent="."]
+
+[node name="spawn_pos" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.649246, 0)
 
 [connection signal="timeout" from="Timer" to="." method="pull_out"]
 [connection signal="timeout" from="Timer2" to="." method="silk_spawn"]

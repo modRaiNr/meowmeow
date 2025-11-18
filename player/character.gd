@@ -73,18 +73,18 @@ func _physics_process(delta):
 		velocity.x = lerp(velocity.x, direction.x * speed, delta * 7.0)
 		velocity.z = lerp(velocity.z, direction.z * speed, delta * 7.0)
 	
+	if Input.is_action_just_pressed("pull"):
+		sm.pull(direction, speed, head.global_rotation)
+	if Input.is_action_just_pressed("atk"):
+		sm.atk()
+		
 	t_bob += delta * velocity.length() * float(is_on_floor())
 	camera.transform.origin = _headbob(t_bob)
 
 	var velocity_clamped = clamp(velocity.length(), 0.5, SPRINT_SPEED * 2)
 	var target_fov = BASE_FOV + FOV_CHANGE * velocity_clamped
 	camera.fov = lerp(camera.fov, target_fov, delta * 8.0)
-	
-	if Input.is_action_just_pressed("pull"):
-		sm.pull(direction, speed, head.global_rotation)
-	if Input.is_action_just_pressed("atk"):
-		sm.atk()
-	
+
 	move_and_slide()
 
 
