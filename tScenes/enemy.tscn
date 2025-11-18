@@ -1,0 +1,59 @@
+[gd_scene load_steps=7 format=3 uid="uid://cg6ysg8fmbf5s"]
+
+[ext_resource type="Script" path="res://tScenes/enemy.gd" id="1_175o4"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xkqwk"]
+radius = 0.3
+height = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j14yh"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_8cikr"]
+material = SubResource("StandardMaterial3D_j14yh")
+radius = 0.3
+height = 1.0
+radial_segments = 8
+rings = 4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l0cey"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_vitj6"]
+material = SubResource("StandardMaterial3D_l0cey")
+radius = 0.05
+height = 0.2
+
+[node name="enemy" type="CharacterBody3D"]
+collision_layer = 4
+collision_mask = 10
+script = ExtResource("1_175o4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_xkqwk")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_8cikr")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0.306747, 0.322604, -0.114629)
+mesh = SubResource("CapsuleMesh_vitj6")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0.306747, 0.322604, 0.0746788)
+mesh = SubResource("CapsuleMesh_vitj6")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("CapsuleShape3D_xkqwk")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="area_entered" from="Area3D" to="." method="area_entered"]
+[connection signal="body_entered" from="Area3D" to="." method="entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

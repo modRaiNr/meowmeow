@@ -1,0 +1,89 @@
+[gd_scene load_steps=12 format=3 uid="uid://bnpbs877np1qe"]
+
+[ext_resource type="Script" path="res://player/character.gd" id="1_p4i8o"]
+[ext_resource type="PackedScene" uid="uid://bhf86ox21s53f" path="res://tScenes/sew_machine.tscn" id="2_ha6pu"]
+[ext_resource type="Shader" path="res://shaders/pixelColorRect.gdshader" id="3_5kusy"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xjbqq"]
+radius = 0.25
+height = 1.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ubg5i"]
+size = Vector3(0.1, 0.1, 2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8goe0"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ggrf6"]
+
+[sub_resource type="Animation" id="Animation_0bid7"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_rteno"]
+resource_name = "ui"
+length = 0.4
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_iecmn"]
+_data = {
+"RESET": SubResource("Animation_0bid7"),
+"ui": SubResource("Animation_rteno")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gteie"]
+shader = ExtResource("3_5kusy")
+shader_parameter/quantize_size = 1.0
+shader_parameter/handle_scale = false
+shader_parameter/handle_subpixels = false
+
+[node name="Character" type="CharacterBody3D"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+collision_mask = 8
+script = ExtResource("1_p4i8o")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_xjbqq")
+
+[node name="Head" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Head"]
+
+[node name="RayCast3D" type="RayCast3D" parent="Head/Camera3D"]
+target_position = Vector3(0, 0, -3)
+collision_mask = 128
+collide_with_areas = true
+collide_with_bodies = false
+debug_shape_custom_color = Color(1, 0, 0, 0)
+
+[node name="Area3D" type="Area3D" parent="Head/Camera3D"]
+collision_mask = 128
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Head/Camera3D/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+shape = SubResource("BoxShape3D_ubg5i")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Head/Camera3D"]
+visible = false
+material_override = SubResource("ShaderMaterial_8goe0")
+transparency = 0.9
+mesh = SubResource("BoxMesh_ggrf6")
+
+[node name="Hand" type="Marker3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, -0.3, -0.2)
+
+[node name="SewMachine" parent="Head/Hand" instance=ExtResource("2_ha6pu")]
+transform = Transform3D(0.9516, 0.276087, 0.135027, -0.258819, 0.482963, 0.836516, 0.165739, -0.830977, 0.531044, -0.0842997, 0.111616, 1.49012e-08)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_iecmn")
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_gteie")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

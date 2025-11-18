@@ -1,0 +1,165 @@
+[gd_scene load_steps=7 format=3 uid="uid://cfl0tuuws2gej"]
+
+[ext_resource type="PackedScene" uid="uid://bnpbs877np1qe" path="res://player/character.tscn" id="1_cd6b1"]
+[ext_resource type="PackedScene" uid="uid://cg6ysg8fmbf5s" path="res://tScenes/enemy.tscn" id="2_uh0up"]
+
+[sub_resource type="Environment" id="Environment_dyrp7"]
+background_mode = 1
+background_color = Color(0.47451, 0.337255, 0.439216, 1)
+background_energy_multiplier = 0.45
+ambient_light_source = 2
+ambient_light_color = Color(0.490196, 0.756863, 0.886275, 1)
+fog_enabled = true
+fog_light_color = Color(0.733333, 0.552941, 0.85098, 1)
+fog_light_energy = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_py353"]
+size = Vector3(0.2, 1, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n4oxj"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_35bmf"]
+size = Vector3(2, 0.2, 2)
+
+[node name="testingsexing" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_dyrp7")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(0.845514, 0.284412, -0.451902, 0.495513, -0.733253, 0.465625, -0.198929, -0.617616, -0.760906, 1, 4, -4)
+light_color = Color(1, 0.694596, 0.996707, 1)
+light_energy = 0.5
+sky_mode = 1
+
+[node name="walls" type="Node3D" parent="."]
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1, 0.5, 0)
+use_collision = true
+collision_layer = 8
+collision_mask = 7
+mesh = SubResource("BoxMesh_py353")
+material = SubResource("StandardMaterial3D_n4oxj")
+
+[node name="CSGMesh3D2" type="CSGMesh3D" parent="walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1, 0.5, -2)
+use_collision = true
+collision_layer = 8
+collision_mask = 7
+mesh = SubResource("BoxMesh_py353")
+material = SubResource("StandardMaterial3D_n4oxj")
+
+[node name="CSGMesh3D3" type="CSGMesh3D" parent="walls"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.002, 0.5, -3.1)
+use_collision = true
+collision_layer = 8
+collision_mask = 7
+mesh = SubResource("BoxMesh_py353")
+material = SubResource("StandardMaterial3D_n4oxj")
+
+[node name="CSGMesh3D4" type="CSGMesh3D" parent="walls"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0.5, 1.1)
+use_collision = true
+collision_layer = 8
+collision_mask = 7
+mesh = SubResource("BoxMesh_py353")
+material = SubResource("StandardMaterial3D_n4oxj")
+
+[node name="floors" type="Node3D" parent="."]
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="floors"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+layers = 32
+use_collision = true
+collision_layer = 8
+collision_mask = 7
+mesh = SubResource("BoxMesh_35bmf")
+material = SubResource("StandardMaterial3D_n4oxj")
+
+[node name="CSGMesh3D2" type="CSGMesh3D" parent="floors"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -0.1, -2)
+layers = 32
+use_collision = true
+collision_layer = 8
+collision_mask = 7
+mesh = SubResource("BoxMesh_35bmf")
+material = SubResource("StandardMaterial3D_n4oxj")
+
+[node name="CSGMesh3D3" type="CSGMesh3D" parent="floors"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, -2)
+layers = 32
+use_collision = true
+collision_layer = 8
+collision_mask = 7
+mesh = SubResource("BoxMesh_35bmf")
+material = SubResource("StandardMaterial3D_n4oxj")
+
+[node name="CSGMesh3D4" type="CSGMesh3D" parent="floors"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -0.1, 0)
+layers = 32
+use_collision = true
+collision_layer = 8
+collision_mask = 7
+mesh = SubResource("BoxMesh_35bmf")
+material = SubResource("StandardMaterial3D_n4oxj")
+
+[node name="CSGMesh3D5" type="CSGMesh3D" parent="floors"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -0.1, -2)
+layers = 32
+use_collision = true
+collision_layer = 8
+collision_mask = 7
+mesh = SubResource("BoxMesh_35bmf")
+material = SubResource("StandardMaterial3D_n4oxj")
+
+[node name="CSGMesh3D6" type="CSGMesh3D" parent="floors"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -0.1, -2)
+layers = 32
+use_collision = true
+collision_layer = 8
+collision_mask = 7
+mesh = SubResource("BoxMesh_35bmf")
+material = SubResource("StandardMaterial3D_n4oxj")
+
+[node name="CSGMesh3D7" type="CSGMesh3D" parent="floors"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -0.1, 0)
+layers = 32
+use_collision = true
+collision_layer = 8
+collision_mask = 7
+mesh = SubResource("BoxMesh_35bmf")
+material = SubResource("StandardMaterial3D_n4oxj")
+
+[node name="CSGMesh3D8" type="CSGMesh3D" parent="floors"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -0.1, 0)
+layers = 32
+use_collision = true
+collision_layer = 8
+collision_mask = 7
+mesh = SubResource("BoxMesh_35bmf")
+material = SubResource("StandardMaterial3D_n4oxj")
+
+[node name="CSGMesh3D9" type="CSGMesh3D" parent="floors"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -0.1, 2)
+layers = 32
+use_collision = true
+collision_layer = 8
+collision_mask = 7
+mesh = SubResource("BoxMesh_35bmf")
+material = SubResource("StandardMaterial3D_n4oxj")
+
+[node name="CSGMesh3D10" type="CSGMesh3D" parent="floors"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -0.1, 2)
+layers = 32
+use_collision = true
+collision_layer = 8
+collision_mask = 7
+mesh = SubResource("BoxMesh_35bmf")
+material = SubResource("StandardMaterial3D_n4oxj")
+
+[node name="Character" parent="." instance=ExtResource("1_cd6b1")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0.5, 0)
+
+[node name="enemy" parent="." instance=ExtResource("2_uh0up")]
+transform = Transform3D(-0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, -0.866025, 2, 0.5, 0)
