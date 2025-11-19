@@ -38,7 +38,7 @@ sky_mode = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1, 0.5, 0)
 use_collision = true
 collision_layer = 8
-collision_mask = 7
+collision_mask = 5
 mesh = SubResource("BoxMesh_py353")
 material = SubResource("StandardMaterial3D_n4oxj")
 
@@ -46,7 +46,7 @@ material = SubResource("StandardMaterial3D_n4oxj")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1, 0.5, -2)
 use_collision = true
 collision_layer = 8
-collision_mask = 7
+collision_mask = 5
 mesh = SubResource("BoxMesh_py353")
 material = SubResource("StandardMaterial3D_n4oxj")
 
@@ -54,7 +54,7 @@ material = SubResource("StandardMaterial3D_n4oxj")
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.002, 0.5, -3.1)
 use_collision = true
 collision_layer = 8
-collision_mask = 7
+collision_mask = 5
 mesh = SubResource("BoxMesh_py353")
 material = SubResource("StandardMaterial3D_n4oxj")
 
@@ -62,7 +62,71 @@ material = SubResource("StandardMaterial3D_n4oxj")
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0.5, 1.1)
 use_collision = true
 collision_layer = 8
-collision_mask = 7
+collision_mask = 5
+mesh = SubResource("BoxMesh_py353")
+material = SubResource("StandardMaterial3D_n4oxj")
+
+[node name="CSGMesh3D5" type="CSGMesh3D" parent="walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1, 1.5, 0)
+use_collision = true
+collision_layer = 8
+collision_mask = 5
+mesh = SubResource("BoxMesh_py353")
+material = SubResource("StandardMaterial3D_n4oxj")
+
+[node name="CSGMesh3D6" type="CSGMesh3D" parent="walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1, 1.5, -2)
+use_collision = true
+collision_layer = 8
+collision_mask = 5
+mesh = SubResource("BoxMesh_py353")
+material = SubResource("StandardMaterial3D_n4oxj")
+
+[node name="CSGMesh3D7" type="CSGMesh3D" parent="walls"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.002, 1.5, -3.1)
+use_collision = true
+collision_layer = 8
+collision_mask = 5
+mesh = SubResource("BoxMesh_py353")
+material = SubResource("StandardMaterial3D_n4oxj")
+
+[node name="CSGMesh3D8" type="CSGMesh3D" parent="walls"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 1.5, 1.1)
+use_collision = true
+collision_layer = 8
+collision_mask = 5
+mesh = SubResource("BoxMesh_py353")
+material = SubResource("StandardMaterial3D_n4oxj")
+
+[node name="CSGMesh3D9" type="CSGMesh3D" parent="walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1, 2.5, 0)
+use_collision = true
+collision_layer = 8
+collision_mask = 5
+mesh = SubResource("BoxMesh_py353")
+material = SubResource("StandardMaterial3D_n4oxj")
+
+[node name="CSGMesh3D10" type="CSGMesh3D" parent="walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1, 2.5, -2)
+use_collision = true
+collision_layer = 8
+collision_mask = 5
+mesh = SubResource("BoxMesh_py353")
+material = SubResource("StandardMaterial3D_n4oxj")
+
+[node name="CSGMesh3D11" type="CSGMesh3D" parent="walls"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.002, 2.5, -3.1)
+use_collision = true
+collision_layer = 8
+collision_mask = 5
+mesh = SubResource("BoxMesh_py353")
+material = SubResource("StandardMaterial3D_n4oxj")
+
+[node name="CSGMesh3D12" type="CSGMesh3D" parent="walls"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 2.5, 1.1)
+use_collision = true
+collision_layer = 8
+collision_mask = 5
 mesh = SubResource("BoxMesh_py353")
 material = SubResource("StandardMaterial3D_n4oxj")
 
@@ -159,7 +223,7 @@ mesh = SubResource("BoxMesh_35bmf")
 material = SubResource("StandardMaterial3D_n4oxj")
 
 [node name="Character" parent="." instance=ExtResource("1_cd6b1")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0.5, 0)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 9.43897, 0.5, 0)
 
 [node name="enemy" parent="." instance=ExtResource("2_uh0up")]
 transform = Transform3D(-0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, -0.866025, 2, 0.5, 0)

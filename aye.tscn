@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://defotcj4dw4f7"]
+[gd_scene load_steps=6 format=3 uid="uid://defotcj4dw4f7"]
 
 [ext_resource type="PackedScene" uid="uid://bhf86ox21s53f" path="res://tScenes/sew_machine.tscn" id="1_ty60l"]
+[ext_resource type="PackedScene" uid="uid://bnpbs877np1qe" path="res://player/character.tscn" id="2_i38hk"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lw3r4"]
 radius = 0.1
@@ -99,18 +100,27 @@ shape = SubResource("CapsuleShape3D_lw3r4")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D5"]
 mesh = SubResource("CapsuleMesh_plgre")
 
-[node name="SewMachine" parent="." instance=ExtResource("1_ty60l")]
-transform = Transform3D(0.426948, -0.904276, 0, 0.904276, 0.426948, 0, 0, 0, 1, 0, 1.74329, 1.19389)
-lock_rotation = false
-freeze = false
-
 [node name="HingeJoint3D5" type="PinJoint3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.03973, 2.37886, 1.01385)
-node_a = NodePath("../SewMachine")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.48722)
+transform = Transform3D(1, 0, 0, 0, 0.630364, 0.7763, 0, -0.7763, 0.630364, 0, 3.20392, 5.85303)
+light_energy = 8.417
 spot_range = 9.442
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ujf4d")
+
+[node name="Character" parent="." instance=ExtResource("2_i38hk")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0.822388, -2.14911)
+
+[node name="SewMachine" parent="Character" instance=ExtResource("1_ty60l")]
+transform = Transform3D(1, 2.58759e-08, -8.48179e-09, -2.58759e-08, 0.805959, -0.591971, -8.48179e-09, 0.591971, 0.805959, 0, 0.994088, -1.54588)
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="SewMachine" parent="Node3D" instance=ExtResource("1_ty60l")]
+transform = Transform3D(0.426948, -0.904276, 0, 0.904276, 0.426948, 0, 0, 0, 1, 1.30108, 1.74329, 1.19389)
+can_sleep = false
+lock_rotation = false
+freeze = false

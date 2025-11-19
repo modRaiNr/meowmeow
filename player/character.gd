@@ -26,8 +26,16 @@ var on_crouch: bool = false
 @onready var raycast: RayCast3D = $Head/Camera3D/RayCast3D
 
 func _ready():
+	Globals.connect("sew_trigger", get_sew_back)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	$Head/Hand/SewMachine.connect("back", func(): $Head/Hand/SewMachine.rotation = Vector3(deg_to_rad(-56.8), deg_to_rad(14.3), deg_to_rad(-28.2)))
+
+func get_sew_back(sew_pos: Vector3, _time_left: float):
+	var tween: Tween = create_tween()
+	
+	tween.stop()
+	tween.tween_property(self, "global_position", sew_pos, 0.5)
+	tween.play()
 
 func _input(event):
 	if Input.is_action_just_pressed("esc"):
@@ -59,6 +67,8 @@ func _physics_process(delta):
 			if "type" in area:
 				area.active()
 	
+	print($Head/Camera3D/Area3D.global_rotation_degrees)
+	
 	if Input.is_action_pressed("sprint"):
 		speed = SPRINT_SPEED
 	else:
@@ -74,7 +84,7 @@ func _physics_process(delta):
 		velocity.z = lerp(velocity.z, direction.z * speed, delta * 7.0)
 	
 	if Input.is_action_just_pressed("pull"):
-		sm.pull(direction, speed, head.global_rotation)
+		sm.pull(direction, speed, $Head/Camera3D/Area3D.global_rotation)
 	if Input.is_action_just_pressed("atk"):
 		sm.atk()
 		

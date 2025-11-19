@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://bnpbs877np1qe"]
+[gd_scene load_steps=14 format=3 uid="uid://bnpbs877np1qe"]
 
 [ext_resource type="Script" path="res://player/character.gd" id="1_p4i8o"]
 [ext_resource type="PackedScene" uid="uid://bhf86ox21s53f" path="res://tScenes/sew_machine.tscn" id="2_ha6pu"]
 [ext_resource type="Shader" path="res://shaders/pixelColorRect.gdshader" id="3_5kusy"]
+[ext_resource type="FontFile" uid="uid://dnaqucruy474c" path="res://fonts/PixelizerBold.ttf" id="4_24jwh"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xjbqq"]
 radius = 0.25
@@ -33,6 +34,10 @@ shader = ExtResource("3_5kusy")
 shader_parameter/quantize_size = 1.0
 shader_parameter/handle_scale = false
 shader_parameter/handle_subpixels = false
+
+[sub_resource type="LabelSettings" id="LabelSettings_t8ima"]
+font = ExtResource("4_24jwh")
+font_size = 32
 
 [node name="Character" type="CharacterBody3D"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
@@ -70,20 +75,60 @@ mesh = SubResource("BoxMesh_ggrf6")
 [node name="Hand" type="Marker3D" parent="Head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, -0.3, -0.2)
 
-[node name="SewMachine" parent="Head/Hand" instance=ExtResource("2_ha6pu")]
-transform = Transform3D(0.9516, 0.276087, 0.135027, -0.258819, 0.482963, 0.836516, 0.165739, -0.830977, 0.531044, -0.0842997, 0.111616, 1.49012e-08)
+[node name="SewMachine" parent="Head/Hand" node_paths=PackedStringArray("player") instance=ExtResource("2_ha6pu")]
+transform = Transform3D(0.951664, 0.275761, 0.135248, -0.258751, 0.482569, 0.836764, 0.165481, -0.831314, 0.530597, -0.084, 0.112, 0)
+player = NodePath("../../..")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_iecmn")
 }
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="Shader" type="CanvasLayer" parent="."]
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+[node name="ColorRect" type="ColorRect" parent="Shader"]
 material = SubResource("ShaderMaterial_gteie")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Hint" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Bot" type="ColorRect" parent="UI/Hint"]
+layout_mode = 0
+offset_left = 501.0
+offset_top = 560.0
+offset_right = 651.0
+offset_bottom = 635.0
+color = Color(0.741176, 0.741176, 0.92549, 1)
+
+[node name="Top" type="ColorRect" parent="UI/Hint"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 506.0
+offset_top = 567.0
+offset_right = 606.0
+offset_bottom = 587.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.396078, 0.396078, 0.560784, 1)
+
+[node name="Label" type="Label" parent="UI/Hint"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 535.0
+offset_top = 582.0
+offset_right = 617.0
+offset_bottom = 614.0
+text = "SPACE"
+label_settings = SubResource("LabelSettings_t8ima")

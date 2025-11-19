@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-var hp: int = 3:
+var hp: int = 10:
 	set(value):
 		hp = value
 		if hp <= 0: queue_free()
