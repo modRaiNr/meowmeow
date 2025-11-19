@@ -13,7 +13,6 @@ signal back
 
 var throwen: bool = false
 
-var silk_count: int = 0
 @onready var joint: PinJoint3D = $joint
 var temp_joint: HingeJoint3D
 
@@ -22,7 +21,7 @@ var idx: int
 
 func wall_up(body: Node3D) -> void:
 	if throwen:
-		pull_out()
+		$Timer.stop()
 	if animator.is_playing():
 		return
 	if collide_with_walls and !active:
@@ -77,7 +76,6 @@ func pull(dir: Vector3, speed: float, prot: Vector3):
 
 func silk_clear():
 	$Timer2.stop()
-	silk_count = 0
 	for child in $joints.get_children():
 		$joints.remove_child(child)
 		child.queue_free()
@@ -98,25 +96,26 @@ func pull_out() -> void:
 
 
 func silk_spawn() -> void:
-	var silk = silk_scene.instantiate()
 	
+	$silkNew.scale.y += 5
+	
+	#var silk = silk_scene.instantiate()
+	#
 	#get_tree().get_root().add_child(silk)
-	$silks.add_child(silk)
-	if silk_count == 0:
-		silk.set_values(joint.global_position, joint.global_rotation)
-		joint.node_b = silk.get_path()
+	#$silks.add_child(silk)
+	#if silk_count == 0:
+		#silk.set_values(joint.global_position, joint.global_rotation)
+		#joint.node_b = silk.get_path()
 		#silk.joint.node_b = joint.node_b
-	else:
-		# выходила ошибка хз поч какой-то проеб по кол-ву элементов в ноде silks
-		# но мне разбираться пиздец лень, поэтому просто проверку въебалФ
-		var prev_silk_joint: PinJoint3D = $silks.get_child(silk_count).joint if is_instance_valid($silks.get_child(silk_count)) else joint
+	#else:
 		
-		silk.set_values(prev_silk_joint.global_position, 
-						prev_silk_joint.global_rotation)
-		prev_silk_joint.node_b = silk.get_path()
-	silk_count += 1
+		#var prev_silk_joint: PinJoint3D = $silks.get_child(silk_count).joint if is_instance_valid($silks.get_child(silk_count)) else joint
+		#
+		#silk.set_values(prev_silk_joint.global_position, 
+						#prev_silk_joint.global_rotation)
+		#prev_silk_joint.node_b = silk.get_path()
+	#silk_count += 1
 	
-	#ласт комм: впизду 
 	
 	#if silk_count == 0:
 		#joint.node_b = silk.get_path()

@@ -1,4 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://defotcj4dw4f7"]
+[gd_scene load_steps=5 format=3 uid="uid://defotcj4dw4f7"]
+
+[ext_resource type="PackedScene" uid="uid://bhf86ox21s53f" path="res://tScenes/sew_machine.tscn" id="1_ty60l"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lw3r4"]
 radius = 0.1
@@ -7,6 +9,8 @@ height = 0.4
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_plgre"]
 radius = 0.1
 height = 0.4
+
+[sub_resource type="Environment" id="Environment_ujf4d"]
 
 [node name="Node3D" type="Node3D"]
 
@@ -94,3 +98,19 @@ shape = SubResource("CapsuleShape3D_lw3r4")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D5"]
 mesh = SubResource("CapsuleMesh_plgre")
+
+[node name="SewMachine" parent="." instance=ExtResource("1_ty60l")]
+transform = Transform3D(0.426948, -0.904276, 0, 0.904276, 0.426948, 0, 0, 0, 1, 0, 1.74329, 1.19389)
+lock_rotation = false
+freeze = false
+
+[node name="HingeJoint3D5" type="PinJoint3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.03973, 2.37886, 1.01385)
+node_a = NodePath("../SewMachine")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.48722)
+spot_range = 9.442
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ujf4d")
