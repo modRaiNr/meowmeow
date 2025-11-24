@@ -59,7 +59,7 @@ func atk_back() -> void:
 	await animator.animation_finished
 	collide_with_walls = true
 
-func pull(dir: Vector3, speed: float, prot: Vector3):
+func pull(dir: Vector3, speed: float):
 	if dir == Vector3.ZERO:
 		return
 	rot = global_rotation
@@ -76,7 +76,7 @@ func pull(dir: Vector3, speed: float, prot: Vector3):
 	
 	change_state()
 	active = true
-	linear_velocity = prot * speed * 4 + Vector3(0, 2, 0)
+	linear_velocity = dir * speed * 4 + Vector3(0, 2, 0)
 	
 	$Timer.start()
 

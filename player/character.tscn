@@ -1,9 +1,16 @@
-[gd_scene load_steps=14 format=3 uid="uid://bnpbs877np1qe"]
+[gd_scene load_steps=22 format=3 uid="uid://bnpbs877np1qe"]
 
 [ext_resource type="Script" path="res://player/character.gd" id="1_p4i8o"]
 [ext_resource type="PackedScene" uid="uid://bhf86ox21s53f" path="res://tScenes/sew_machine.tscn" id="2_ha6pu"]
+[ext_resource type="Script" path="res://fsm/fsm.gd" id="2_q76yb"]
 [ext_resource type="Shader" path="res://shaders/pixelColorRect.gdshader" id="3_5kusy"]
+[ext_resource type="Script" path="res://player/idle.gd" id="3_yb6ja"]
 [ext_resource type="FontFile" uid="uid://dnaqucruy474c" path="res://fonts/PixelizerBold.ttf" id="4_24jwh"]
+[ext_resource type="Script" path="res://player/run.gd" id="4_qpf3o"]
+[ext_resource type="Script" path="res://player/attack.gd" id="6_bfbfj"]
+[ext_resource type="Script" path="res://player/throw.gd" id="7_dysp4"]
+[ext_resource type="Script" path="res://player/fly.gd" id="8_13q76"]
+[ext_resource type="Script" path="res://player/prepare.gd" id="8_l3reu"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xjbqq"]
 radius = 0.25
@@ -39,10 +46,42 @@ shader_parameter/handle_subpixels = false
 font = ExtResource("4_24jwh")
 font_size = 32
 
+[sub_resource type="LabelSettings" id="LabelSettings_uq4r1"]
+font = ExtResource("4_24jwh")
+font_size = 24
+
 [node name="Character" type="CharacterBody3D"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 collision_mask = 8
 script = ExtResource("1_p4i8o")
+
+[node name="FSM" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_q76yb")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="FSM" node_paths=PackedStringArray("player")]
+script = ExtResource("3_yb6ja")
+player = NodePath("../..")
+
+[node name="Run" type="Node" parent="FSM" node_paths=PackedStringArray("player")]
+script = ExtResource("4_qpf3o")
+player = NodePath("../..")
+
+[node name="Attack" type="Node" parent="FSM" node_paths=PackedStringArray("player")]
+script = ExtResource("6_bfbfj")
+player = NodePath("../..")
+
+[node name="Throw" type="Node" parent="FSM" node_paths=PackedStringArray("player")]
+script = ExtResource("7_dysp4")
+player = NodePath("../..")
+
+[node name="Fly" type="Node" parent="FSM" node_paths=PackedStringArray("player")]
+script = ExtResource("8_13q76")
+player = NodePath("../..")
+
+[node name="Prepare" type="Node" parent="FSM" node_paths=PackedStringArray("player")]
+script = ExtResource("8_l3reu")
+player = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_xjbqq")
@@ -97,6 +136,7 @@ grow_vertical = 2
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="Hint" type="Control" parent="UI"]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -132,3 +172,27 @@ offset_right = 617.0
 offset_bottom = 614.0
 text = "SPACE"
 label_settings = SubResource("LabelSettings_t8ima")
+
+[node name="State" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 155.0
+offset_bottom = 80.0
+
+[node name="ColorRect" type="ColorRect" parent="UI/State"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.989808, 0.572503, 1, 0.835294)
+
+[node name="Label" type="Label" parent="UI/State"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_uq4r1")
